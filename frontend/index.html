@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level Up Your Life</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="dark-mode">
+    <!-- App Container -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-gamepad"></i> HabitQuest
+            </div>
+            <div class="header-controls">
+                <button id="test-notification" class="icon-btn" title="Test/Enable Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <button id="theme-toggle" class="icon-btn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Section (Gamification) -->
+        <section class="stats-card">
+            <div class="level-info">
+                <span class="level-label">Level <span id="user-level">1</span></span>
+                <span class="xp-label"><span id="user-xp">0</span> XP</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="xp-bar" style="width: 0%;"></div>
+            </div>
+            <div class="badges-container" id="badges-list">
+                <!-- Badges injected here -->
+                <span class="placeholder-badge">No Badges Yet</span>
+            </div>
+        </section>
+
+
+
+        <!-- Habits List -->
+        <main>
+            <div class="list-header">
+                <h2>My Quests</h2>
+                <button id="add-habit-btn" class="primary-btn"><i class="fa-solid fa-plus"></i> New Habit</button>
+            </div>
+            <div id="habit-list" class="habit-list">
+                <!-- Habits injected here -->
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Modal: Add Habit -->
+    <div id="add-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>New Quest</h3>
+            <input type="text" id="habit-title" placeholder="Habit Title (e.g., Drink Water)" autofocus>
+            <textarea id="habit-desc" placeholder="Description (Optional)"></textarea>
+
+            <div class="reminder-section">
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="reminder-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Enable Daily Reminder</span>
+                </div>
+                <input type="time" id="reminder-time" class="time-input" disabled>
+            </div>
+
+            <div class="input-group">
+                <label for="target-days">Quest Duration (Days):</label>
+                <input type="number" id="target-days" placeholder="e.g. 30 (Leave empty for forever)" min="1">
+            </div>
+            <input type="hidden" id="edit-habit-id">
+
+            <div class="modal-actions">
+                <button id="cancel-add" class="secondary-btn">Cancel</button>
+                <button id="save-habit" class="primary-btn">Start Quest</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Missed Reason -->
+    <div id="miss-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Quest Failed?</h3>
+            <p>What happened? Be honest, we'll help you get back on track.</p>
+            <div class="reason-tags">
+                <button class="tag" data-reason="tired">Tired</button>
+                <button class="tag" data-reason="busy">Busy</button>
+                <button class="tag" data-reason="forgot">Forgot</button>
+                <button class="tag" data-reason="lazy">Lazy</button>
+                <button class="tag" data-reason="sick">Sick</button>
+            </div>
+            <input type="text" id="custom-reason" placeholder="Or type reason...">
+            <div class="modal-actions">
+                <button id="cancel-miss" class="secondary-btn">Cancel</button>
+                <button id="confirm-miss" class="danger-btn">Confirm Miss</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Calendar History -->
+    <div id="calendar-modal" class="modal hidden">
+        <div class="modal-content calendar-content">
+            <div class="modal-header">
+                <h3 id="calendar-title">Habit History</h3>
+                <button id="close-calendar" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="calendar-controls">
+                <button id="prev-month" class="icon-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <span id="current-month">October 2023</span>
+                <button id="next-month" class="icon-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Days injected here -->
+            </div>
+
+            <div class="calendar-legend">
+                <span class="legend-item"><span class="dot green"></span> Done</span>
+                <span class="legend-item"><span class="dot red"></span> Missed</span>
+                <span class="legend-item"><span class="dot gray"></span> Pending</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Level Up / Badge -->
+    <div id="reward-modal" class="modal hidden">
+        <div class="modal-content reward-content">
+            <div class="reward-icon">🎉</div>
+            <h2 id="reward-title">Level Up!</h2>
+            <p id="reward-message">You reached Level 2!</p>
+            <button id="close-reward" class="primary-btn">Awesome!</button>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
